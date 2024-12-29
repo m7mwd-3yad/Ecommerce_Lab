@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Item Details</title>
+    <link rel="stylesheet" href="./assets/css/main.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <ul class="nav-links">
+        <li class="logo"><a href="./index.html">SHOPLANE </a></li>
+        <li><a href="#clothing">CLOTHING</a></li>
+        <li><a href="#accessories">ACCESSORIES</a></li>
+      </ul>
+      <div class="search-cart">
+        <input
+          type="text"
+          placeholder="Search for Clothing and Accessories"
+          class="search-bar"
+        />
+      </div>
+      <div class="navbar">
+        <ul class="nav-links">
+          <li class="log"><a class="l" href="./login.html">Login</a></li>
+          <li class="log"><a class="l" href="./index.html">Logout</a></li>
+        </ul>
+      </div>
+      <div class="cart-icon">
+        <a href="./checkOut.html"><span class="cart-count">3</span></a>
+      </div>
+    </div>
+
+    <!--  -->
+    <div class="item-details">
+      <div class="item-image">
+        <img
+          id="item-image"
+          src="https://via.placeholder.com/400"
+          alt="Item Image"
+        />
+      </div>
+      <div class="item-info">
+        <h2 id="item-name">Stylish Black Jacket</h2>
+        <h3 id="item-brand">Hush Puppies</h3>
+        <p class="description" id="item-description">
+          A high-quality stylish black jacket, perfect for casual and sporty
+          looks. It combines comfort with durability.
+        </p>
+        <p class="item-info-details">
+          <strong>Color:</strong> <span id="item-color">Black</span>
+        </p>
+        <p class="item-info-details">
+          <strong>Size:</strong> <span id="item-size">L</span>
+        </p>
+        <p class="price" id="item-price">$3770</p>
+
+        <button id="add-to-cart-btn" class="add-to-cart-btn">
+          Add to Cart
+        </button>
+
+        <div class="additional-info">
+          <h4>Product Features</h4>
+          <ul>
+            <li>Premium quality material</li>
+            <li>Breathable and lightweight</li>
+            <li>Perfect for outdoor activities</li>
+            <li>Machine washable</li>
+            <li>Available in multiple sizes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <section>
+        <div id="containerFooter">
+          <div id="webFooter">
+            <h3>online store</h3>
+            <p>men clothing</p>
+            <p>women clothing</p>
+            <p>men accessories</p>
+            <p>women accessories</p>
+          </div>
+          <div id="webFooter">
+            <h3>helpful link</h3>
+            <p>home</p>
+            <p>about</p>
+            <p>contact</p>
+          </div>
+          <div id="webFooter">
+            <h3>partners</h3>
+            <p>zara</p>
+            <p>pantaloons</p>
+            <p>levis</p>
+            <p>ucb</p>
+            <p>+ many more</p>
+          </div>
+          <div id="webFooter">
+            <h3>address</h3>
+            <p>building 101</p>
+            <p>central avenue</p>
+            <p>la - 902722</p>
+            <p>united states</p>
+          </div>
+        </div>
+        <div id="credit">
+          <a href="https://linkedin.com/in/priyanka-sharma-b79401142">
+            © Priyanka Sharma
+          </a>
+          &nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp
+          <a href="https://www.edyoda.com/" target="_blank"> EDYODA </a>
+        </div>
+      </section>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      const itemName = getQueryParam("name") || "Stylish Black Jacket";
+      const itemImage =
+        getQueryParam("image") || "https://via.placeholder.com/400";
+      const itemPrice = getQueryParam("price") || "$3770";
+      const itemDescription =
+        getQueryParam("description") ||
+        "A high-quality stylish black jacket, perfect for casual and sporty looks. It combines comfort with durability.";
+      const itemBrand = getQueryParam("brand") || "Hush Puppies";
+      const itemColor = getQueryParam("color") || "Black";
+      const itemSize = getQueryParam("size") || "L";
+
+      document.getElementById("item-name").textContent = itemName;
+      document.getElementById("item-image").src = itemImage;
+      document.getElementById("item-price").textContent = itemPrice;
+      document.getElementById("item-description").textContent = itemDescription;
+      document.getElementById("item-brand").textContent = itemBrand;
+      document.getElementById("item-color").textContent = itemColor;
+      document.getElementById("item-size").textContent = itemSize;
+
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+      const cartCount = document.querySelector(".cart-count");
+      cartCount.textContent = cartItems.length;
+
+      document
+        .getElementById("add-to-cart-btn")
+        .addEventListener("click", () => {
+          const newItem = {
+            name: itemName,
+            image: itemImage,
+            price: itemPrice,
+          };
+
+          cartItems.push(newItem);
+
+          localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+          cartCount.textContent = cartItems.length;
+
+          alert("Product Added Successfully");
+        });
+    </script>
+  </body>
+</html>
